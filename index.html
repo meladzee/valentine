@@ -6,6 +6,10 @@
 <title>იქნები ჩემი ვალენტინი? 💖</title>
 
 <style>
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
     height: 100vh;
@@ -18,31 +22,41 @@ body {
 }
 
 .card {
+    width: 90%;
+    max-width: 400px;
     background: white;
-    padding: 40px 60px;
+    padding: 30px 20px;
     border-radius: 25px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
     text-align: center;
+    position: relative;
 }
 
 h1 {
+    font-size: 22px;
     color: #ff4d6d;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+}
+
+.buttons {
+    position: relative;
+    height: 120px;
 }
 
 button {
-    padding: 12px 30px;
-    font-size: 18px;
+    padding: 12px 20px;
+    font-size: 16px;
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    margin: 10px;
     transition: 0.3s;
 }
 
 #yesBtn {
     background: #ff4d6d;
     color: white;
+    position: relative;
+    z-index: 1;
 }
 
 #noBtn {
@@ -52,13 +66,13 @@ button {
 
 .heart {
     position: fixed;
-    font-size: 20px;
-    animation: explode 3s linear forwards;
+    font-size: 22px;
+    animation: floatUp 3s linear forwards;
 }
 
-@keyframes explode {
-    0% { transform: translateY(0) scale(1); opacity: 1; }
-    100% { transform: translateY(-600px) scale(2); opacity: 0; }
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-600px); opacity: 0; }
 }
 </style>
 </head>
@@ -66,57 +80,59 @@ button {
 <body>
 
 <div class="card">
-    <h1>იქნები ჩემი ვალენტინი გოგჩო? ❣️</h1>
-    <button id="yesBtn">კი ❣️</button>
-    <button id="noBtn">არა 😢</button>
+    <h1>იქნები ჩემი ვალენტინი? 💕</h1>
+    <div class="buttons">
+        <button id="yesBtn">კი 💖</button>
+        <button id="noBtn">არა 😢</button>
+    </div>
 </div>
 
 <script>
 let noCount = 0;
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
+const buttonsArea = document.querySelector(".buttons");
 
 function moveNoButton() {
     noCount++;
 
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+    const areaWidth = buttonsArea.clientWidth - 80;
+    const areaHeight = buttonsArea.clientHeight - 40;
+
+    const x = Math.random() * areaWidth;
+    const y = Math.random() * areaHeight;
 
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 
-    // Yes button grows
     yesBtn.style.transform = `scale(${1 + noCount * 0.1})`;
 }
 
 noBtn.addEventListener("mouseover", moveNoButton);
-noBtn.addEventListener("click", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
 
 yesBtn.addEventListener("click", () => {
     document.body.innerHTML = `
-    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#ff758c,#ff7eb3);text-align:center;">
-        <h1 style="color:white;font-size:45px;">
-        კანეშნა რომ ჩემი ვალენტინი ხარ ფისო ❣️👑<br><br>
-           ჰიჰიჰიჰიჰიჰიჰიჰიჰიჰი 🥰
+    <div style="display:flex;flex-direction:column;justify-content:center;align-items:center;height:100vh;background:linear-gradient(135deg,#ff758c,#ff7eb3);text-align:center;padding:20px;">
+        <h1 style="color:white;font-size:28px;">
+        შენ ოფიციალურად ჩემი ვალენტინი ხარ 💖👑<br><br>
+        მზად ხარ ყველაზე ტკბილი თავგადასავლისთვის? 🥰
         </h1>
     </div>
     `;
-
-    setInterval(createHeart, 150);
+    setInterval(createHeart, 200);
 });
 
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
-    heart.innerHTML = "❣️";
+    heart.innerHTML = "💖";
     heart.style.left = Math.random() * window.innerWidth + "px";
     heart.style.top = window.innerHeight + "px";
-    heart.style.fontSize = (20 + Math.random() * 30) + "px";
     document.body.appendChild(heart);
 
     setTimeout(() => heart.remove(), 3000);
 }
 </script>
 
-</body>
-</html>
+</body
